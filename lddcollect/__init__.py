@@ -4,7 +4,7 @@ import subprocess
 import sys
 import warnings
 from typing import List, Iterable, Iterator, Tuple, Dict, Set, Any, Union, Optional
-import collections
+import collections.abc
 import re
 from os import readlink, scandir, DirEntry
 from pathlib import Path
@@ -223,7 +223,7 @@ def process_elf(fname: Union[str, Iterable[str]],
         ltree = lddtree(fname)
         _update_realpath(ltree)
         q.put((fname, ltree))
-    elif isinstance(fname, collections.Iterable):
+    elif isinstance(fname, collections.abc.Iterable):
         # create fake top level lib that depends on supplied inputs
         roots = [f for f in fname]
         libs: Dict[str, Any] = {}
